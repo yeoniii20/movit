@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import "../assets/styles.css";
+
 export default {
   name: "HeaderCom",
 };

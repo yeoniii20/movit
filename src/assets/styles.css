@@ -1,9 +1,8 @@
 @font-face {
   font-family: "SKYBORI";
-  src: url("@/assets/fonts/SKYBORI.otf") format("truetype");
+  src: url("@/assets/fonts/SKYBORI.ttf") format("truetype");
 }
 
 body {
   font-family: "SKYBORI", sans-serif;
 }
-
