@@ -6,13 +6,13 @@
 </template>
 
 <script>
-// import SidebarCom from "@/components/SidebarCom.vue";
+import SidebarCom from "@/components/SidebarCom.vue";
 import ContentCom from "@/components/ContentCom.vue";
 
 export default {
   name: "DetailView",
   components: {
-    // SidebarCom,
+    SidebarCom,
     ContentCom,
   },
 };
