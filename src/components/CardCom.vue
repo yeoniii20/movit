@@ -36,6 +36,7 @@ export default {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 300px;
   margin: 1em;
+  cursor: pointer;
 }
 
 .card-image {
