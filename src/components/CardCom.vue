@@ -1,4 +1,3 @@
-<!-- src/components/Card.vue -->
 <template>
   <div class="card">
     <img :src="image" alt="Movie Image" class="card-image" />
@@ -41,11 +40,11 @@ export default {
 
 .card-image {
   width: 100%;
-  height: auto;
+  height: 30rem;
 }
 
 .card-content {
-  padding: 1em;
+  padding: 1rem;
 }
 
 .card-title {
@@ -55,5 +54,12 @@ export default {
 
 .card-description {
   color: #555;
+  max-width: 100%;
+  height: 4.25rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>
