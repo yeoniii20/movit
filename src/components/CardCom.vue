@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card" @click="navigateToDetail">
     <img :src="image" alt="Movie Image" class="card-image" />
     <div class="card-content">
       <h2 class="card-title">{{ title }}</h2>
@@ -23,6 +23,15 @@ export default {
     description: {
       type: String,
       required: true,
+    },
+    id: {
+      type: Number,
+      required: true,
+    },
+  },
+  methods: {
+    navigateToDetail() {
+      this.$router.push({ name: "detail", params: { id: this.id } });
     },
   },
 };
