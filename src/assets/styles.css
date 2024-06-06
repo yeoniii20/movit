@@ -8,7 +8,13 @@
   src: url("@/assets/fonts/Orbit-Regular.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "SUITE";
+  src: url("@/assets/fonts/SUITE-Regular.otf") format("opentype");
+}
+
 body {
-  font-family: "Orbit", sans-serif;
+  font-family: "SUITE", sans-serif;
+  /* font-family: "Orbit", sans-serif; */
   /* font-family: "SKYBORI", sans-serif; */
 }
