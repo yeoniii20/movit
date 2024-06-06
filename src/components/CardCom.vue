@@ -65,7 +65,7 @@ export default {
 .card-description {
   color: #555;
   max-width: 100%;
-  height: 4.25rem;
+  height: 3.75rem;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
