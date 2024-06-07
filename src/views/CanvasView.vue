@@ -9,9 +9,15 @@
         v-for="color in colors"
         :key="color"
         class="crayon"
-        :style="{ backgroundColor: color }"
+        :style="{
+          backgroundColor: color,
+          boxShadow:
+            selectedColor === color
+              ? '0 0 10px 2px rgba(0, 0, 0, 0.5)'
+              : 'none',
+        }"
         @click="selectColor(color)"
-      ></div>
+      />
     </div>
     <CanvasCom ref="canvasCom" :selectedColor="selectedColor" />
   </div>
@@ -28,7 +34,7 @@ export default {
   },
   setup() {
     const canvasCom = ref(null);
-    const selectedColor = ref("rgba(255, 0, 0)");
+    const selectedColor = ref("red");
 
     const colors = [
       "red",
@@ -89,5 +95,7 @@ export default {
   margin: 0 5px;
   border-radius: 5px;
   cursor: pointer;
+  border: 2px solid transparent;
+  transition: box-shadow 0.3s ease;
 }
 </style>
