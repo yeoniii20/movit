@@ -1,10 +1,11 @@
-<!-- src/components/Header.vue -->
 <template>
   <header class="header">
     <nav>
       <div class="logo">MovieSearch</div>
       <ul>
-        <li><router-link to="/">Home</router-link></li>
+        <li><router-link to="/">Main</router-link></li>
+        <li><router-link to="/home">Home</router-link></li>
+        <li><router-link to="/canvas">Canvas</router-link></li>
         <li><router-link to="/about">About</router-link></li>
         <li><router-link to="/detail">Detail</router-link></li>
       </ul>
