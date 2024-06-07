@@ -4,6 +4,7 @@
       <div class="btn" @click="downloadCanvas">Download</div>
       <div class="btn" @click="clearCanvas">Clear</div>
       <div class="btn" @click="toggleSizeModal">Select Size</div>
+      <div class="btn" @click="toggleEraser">Toggle Eraser</div>
     </div>
     <div class="crayon-container">
       <div
