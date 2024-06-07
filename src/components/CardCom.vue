@@ -1,6 +1,5 @@
-<!-- src/components/Card.vue -->
 <template>
-  <div class="card">
+  <div class="card" @click="navigateToDetail">
     <img :src="image" alt="Movie Image" class="card-image" />
     <div class="card-content">
       <h2 class="card-title">{{ title }}</h2>
@@ -25,6 +24,15 @@ export default {
       type: String,
       required: true,
     },
+    id: {
+      type: Number,
+      required: true,
+    },
+  },
+  methods: {
+    navigateToDetail() {
+      this.$router.push({ name: "detail", params: { id: this.id } });
+    },
   },
 };
 </script>
@@ -37,15 +45,16 @@ export default {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 300px;
   margin: 1em;
+  cursor: pointer;
 }
 
 .card-image {
   width: 100%;
-  height: auto;
+  height: 30rem;
 }
 
 .card-content {
-  padding: 1em;
+  padding: 1rem;
 }
 
 .card-title {
@@ -55,5 +64,12 @@ export default {
 
 .card-description {
   color: #555;
+  max-width: 100%;
+  height: 3.75rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>

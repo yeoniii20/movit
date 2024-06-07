@@ -2,16 +2,16 @@
   <div class="content">
     <div class="header">
       <div>
-        <h1>title_01</h1>
-        <h2>sub_title_01</h2>
+        <h1>{{ movie.title }}</h1>
+        <h2>{{ movie.subTitle }}</h2>
       </div>
       <div class="user-info">
         <span class="user-icon">👤</span>
-        <span>user_name</span>
+        <span>{{ movie.user }}</span>
       </div>
     </div>
     <div class="image-section">
-      <div class="image-placeholder">content_img</div>
+      <img :src="movie.image" alt="Movie Image" class="image-placeholder" />
       <div class="actions">
         <button>⬆️</button>
         <button>⭐️</button>
@@ -20,8 +20,7 @@
       </div>
     </div>
     <div class="description">
-      <p>**생각하면서 읽는 책, 자유롭게 표현까지 💬**</p>
-      <p>안녕하세요, 토독토독입니다. ...</p>
+      <p>{{ movie.description }}</p>
     </div>
   </div>
 </template>
@@ -29,6 +28,12 @@
 <script>
 export default {
   name: "ContentCom",
+  props: {
+    movie: {
+      type: Object,
+      required: true,
+    },
+  },
 };
 </script>
 

@@ -28,7 +28,7 @@ export default {
 <style>
 body {
   margin: 0;
-  font-family: "SKYBORI", sans-serif;
+  font-family: "SUITE", sans-serif;
 }
 
 #app {
