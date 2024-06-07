@@ -12,7 +12,7 @@
       :style="{
         left: cursorX + 'px',
         top: cursorY + 'px',
-        backgroundColor: selectedColor,
+        backgroundColor: isEraser ? 'white' : selectedColor,
       }"
     ></div>
   </div>
@@ -28,6 +28,10 @@ export default {
       type: String,
       required: true,
     },
+    isEraser: {
+      type: Boolean,
+      required: true,
+    },
   },
   setup(props) {
     const canvas = ref(null);
@@ -39,7 +43,9 @@ export default {
     watch(
       () => props.selectedColor,
       (newColor) => {
-        ctx.value.strokeStyle = newColor;
+        if (!props.isEraser) {
+          ctx.value.strokeStyle = newColor;
+        }
       }
     );
 
@@ -68,6 +74,14 @@ export default {
 
       ctx.value.lineWidth = 5;
       ctx.value.lineCap = "round";
+
+      if (props.isEraser) {
+        ctx.value.globalCompositeOperation = "destination-out";
+        ctx.value.strokeStyle = "rgba(0,0,0,1)";
+      } else {
+        ctx.value.globalCompositeOperation = "source-over";
+        ctx.value.strokeStyle = props.selectedColor;
+      }
 
       ctx.value.lineTo(cursorX.value, cursorY.value);
       ctx.value.stroke();
