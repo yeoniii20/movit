@@ -4,11 +4,10 @@
       <div class="btn" @click="downloadCanvas">Download</div>
       <div class="btn" @click="clearCanvas">Clear</div>
       <div class="btn" @click="toggleSizeModal">Select Size</div>
-      <div class="btn" @click="toggleEraser">Toggle Eraser</div>
     </div>
     <div class="crayon-container">
       <div
-        v-for="color in colors"
+        v-for="color in COLOR_PALETTE"
         :key="color"
         class="crayon"
         :style="{
@@ -41,6 +40,7 @@
 import { ref } from "vue";
 import CanvasCom from "@/components/CanvasCom.vue";
 import CanvasModal from "@/components/Modal/CanvasModal.vue";
+import { COLOR_PALETTE } from "@/utils/colorPalette";
 
 export default {
   name: "CanvasView",
@@ -55,16 +55,6 @@ export default {
     const showSizeModal = ref(false);
     const toolSize = ref(5);
     const sizes = ref([5, 10, 15, 20]);
-
-    const colors = [
-      "red",
-      "orange",
-      "yellow",
-      "green",
-      "blue",
-      "indigo",
-      "violet",
-    ];
 
     const selectColor = (color) => {
       selectedColor.value = color;
@@ -87,24 +77,19 @@ export default {
       toolSize.value = size;
     };
 
-    const toggleEraser = () => {
-      isEraser.value = !isEraser.value;
-    };
-
     return {
       canvasCom,
       downloadCanvas,
       clearCanvas,
       toggleSizeModal,
       selectToolSize,
-      colors,
       selectColor,
       selectedColor,
       isEraser,
       showSizeModal,
       toolSize,
       sizes,
-      toggleEraser,
+      COLOR_PALETTE,
     };
   },
 };
@@ -125,14 +110,16 @@ export default {
 
 .crayon-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 10px; /* 간격을 10px로 설정 */
   margin: 1rem 0;
 }
 
 .crayon {
   width: 30px;
-  height: 100px;
-  margin: 0 5px;
+  height: 60px; /* 높이를 60px로 줄임 */
+  margin: 0; /* 개별 간격 제거 */
   border-radius: 5px;
   cursor: pointer;
   border: 2px solid transparent;
