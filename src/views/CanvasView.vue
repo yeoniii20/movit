@@ -3,6 +3,7 @@
     <div class="btn-container">
       <div class="btn" @click="downloadCanvas">Download</div>
       <div class="btn" @click="clearCanvas">Clear</div>
+      <div class="btn" @click="toggleSizeModal">Select Size</div>
       <div class="btn" @click="toggleEraser">Toggle Eraser</div>
     </div>
     <div class="crayon-container">
@@ -24,6 +25,14 @@
       ref="canvasCom"
       :selectedColor="selectedColor"
       :isEraser="isEraser"
+      :toolSize="toolSize"
+    />
+    <CanvasModal
+      v-if="showSizeModal"
+      :sizes="sizes"
+      :selectedSize="toolSize"
+      @close="toggleSizeModal"
+      @select-size="selectToolSize"
     />
   </div>
 </template>
@@ -31,16 +40,21 @@
 <script>
 import { ref } from "vue";
 import CanvasCom from "@/components/CanvasCom.vue";
+import CanvasModal from "@/components/Modal/CanvasModal.vue";
 
 export default {
   name: "CanvasView",
   components: {
     CanvasCom,
+    CanvasModal,
   },
   setup() {
     const canvasCom = ref(null);
     const selectedColor = ref("red");
     const isEraser = ref(false);
+    const showSizeModal = ref(false);
+    const toolSize = ref(5);
+    const sizes = ref([5, 10, 15, 20]);
 
     const colors = [
       "red",
@@ -54,6 +68,7 @@ export default {
 
     const selectColor = (color) => {
       selectedColor.value = color;
+      isEraser.value = false;
     };
 
     const downloadCanvas = () => {
@@ -64,6 +79,14 @@ export default {
       canvasCom.value.clearCanvas();
     };
 
+    const toggleSizeModal = () => {
+      showSizeModal.value = !showSizeModal.value;
+    };
+
+    const selectToolSize = (size) => {
+      toolSize.value = size;
+    };
+
     const toggleEraser = () => {
       isEraser.value = !isEraser.value;
     };
@@ -72,11 +95,16 @@ export default {
       canvasCom,
       downloadCanvas,
       clearCanvas,
-      toggleEraser,
+      toggleSizeModal,
+      selectToolSize,
       colors,
       selectColor,
       selectedColor,
       isEraser,
+      showSizeModal,
+      toolSize,
+      sizes,
+      toggleEraser,
     };
   },
 };
