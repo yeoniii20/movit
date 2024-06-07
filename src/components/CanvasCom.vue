@@ -13,6 +13,8 @@
         left: cursorX + 'px',
         top: cursorY + 'px',
         backgroundColor: isEraser ? 'white' : selectedColor,
+        width: toolSize + 'px',
+        height: toolSize + 'px',
       }"
     ></div>
   </div>
@@ -26,6 +28,14 @@ export default {
   props: {
     selectedColor: {
       type: String,
+      required: true,
+    },
+    isEraser: {
+      type: Boolean,
+      required: true,
+    },
+    toolSize: {
+      type: Number,
       required: true,
     },
     isEraser: {
@@ -72,7 +82,7 @@ export default {
 
       if (!drawing) return;
 
-      ctx.value.lineWidth = 5;
+      ctx.value.lineWidth = props.toolSize;
       ctx.value.lineCap = "round";
 
       if (props.isEraser) {
@@ -147,8 +157,6 @@ canvas {
 
 .cursor {
   position: absolute;
-  width: 10px;
-  height: 10px;
   border-radius: 50%;
   pointer-events: none;
 }
