@@ -9,22 +9,39 @@
     <canvas ref="canvas"></canvas>
     <div
       class="cursor"
-      :style="{ left: cursorX + 'px', top: cursorY + 'px' }"
+      :style="{
+        left: cursorX + 'px',
+        top: cursorY + 'px',
+        backgroundColor: selectedColor,
+      }"
     ></div>
   </div>
 </template>
 
 <script>
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref, onMounted, onBeforeUnmount, watch } from "vue";
 
 export default {
   name: "CanvasCom",
-  setup() {
+  props: {
+    selectedColor: {
+      type: String,
+      required: true,
+    },
+  },
+  setup(props) {
     const canvas = ref(null);
     const ctx = ref(null);
     const cursorX = ref(0);
     const cursorY = ref(0);
     let drawing = false;
+
+    watch(
+      () => props.selectedColor,
+      (newColor) => {
+        ctx.value.strokeStyle = newColor;
+      }
+    );
 
     const startDrawing = (event) => {
       if (event.target.tagName === "CANVAS") {
@@ -51,7 +68,6 @@ export default {
 
       ctx.value.lineWidth = 5;
       ctx.value.lineCap = "round";
-      ctx.value.strokeStyle = "rgba(255, 0, 0, 0.5)";
 
       ctx.value.lineTo(cursorX.value, cursorY.value);
       ctx.value.stroke();
@@ -64,6 +80,11 @@ export default {
       canvasElement.width = canvasElement.clientWidth;
       canvasElement.height = canvasElement.clientHeight;
       ctx.value = canvasElement.getContext("2d");
+      ctx.value.strokeStyle = props.selectedColor;
+    };
+
+    const clearCanvas = () => {
+      ctx.value.clearRect(0, 0, canvas.value.width, canvas.value.height);
     };
 
     const downloadCanvas = () => {
@@ -90,6 +111,7 @@ export default {
       stopDrawing,
       draw,
       downloadCanvas,
+      clearCanvas,
     };
   },
 };
@@ -113,7 +135,6 @@ canvas {
   position: absolute;
   width: 10px;
   height: 10px;
-  background-color: rgba(255, 0, 0, 0.5); /* 크레파스 색상 */
   border-radius: 50%;
   pointer-events: none;
 }
