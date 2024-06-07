@@ -78,6 +78,10 @@ export default {
       toolSize.value = size;
     };
 
+    const toggleEraser = () => {
+      isEraser.value = !isEraser.value;
+    };
+
     return {
       canvasCom,
       downloadCanvas,
@@ -85,6 +89,7 @@ export default {
       toggleSizeModal,
       selectToolSize,
       selectColor,
+      toggleEraser,
       selectedColor,
       isEraser,
       showSizeModal,
@@ -113,14 +118,14 @@ export default {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px; /* 간격을 10px로 설정 */
+  gap: 10px;
   margin: 1rem 0;
 }
 
 .crayon {
   width: 30px;
-  height: 60px; /* 높이를 60px로 줄임 */
-  margin: 0; /* 개별 간격 제거 */
+  height: 60px;
+  margin: 0; 
   border-radius: 5px;
   cursor: pointer;
   border: 2px solid transparent;
