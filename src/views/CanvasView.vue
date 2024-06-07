@@ -3,6 +3,7 @@
     <div class="btn-container">
       <div class="btn" @click="downloadCanvas">Download</div>
       <div class="btn" @click="clearCanvas">Clear</div>
+      <div class="btn" @click="toggleEraser">Toggle Eraser</div>
     </div>
     <div class="crayon-container">
       <div
@@ -19,7 +20,11 @@
         @click="selectColor(color)"
       />
     </div>
-    <CanvasCom ref="canvasCom" :selectedColor="selectedColor" />
+    <CanvasCom
+      ref="canvasCom"
+      :selectedColor="selectedColor"
+      :isEraser="isEraser"
+    />
   </div>
 </template>
 
@@ -35,6 +40,7 @@ export default {
   setup() {
     const canvasCom = ref(null);
     const selectedColor = ref("red");
+    const isEraser = ref(false);
 
     const colors = [
       "red",
@@ -58,13 +64,19 @@ export default {
       canvasCom.value.clearCanvas();
     };
 
+    const toggleEraser = () => {
+      isEraser.value = !isEraser.value;
+    };
+
     return {
       canvasCom,
       downloadCanvas,
       clearCanvas,
+      toggleEraser,
       colors,
       selectColor,
       selectedColor,
+      isEraser,
     };
   },
 };
