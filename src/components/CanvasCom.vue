@@ -155,5 +155,8 @@ canvas {
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
+  border-color: #fff;
+  border-width: 0.1rem;
+  border-style: solid;
 }
 </style>
