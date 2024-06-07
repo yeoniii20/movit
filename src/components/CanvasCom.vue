@@ -38,10 +38,6 @@ export default {
       type: Number,
       required: true,
     },
-    isEraser: {
-      type: Boolean,
-      required: true,
-    },
   },
   setup(props) {
     const canvas = ref(null);
