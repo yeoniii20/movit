@@ -109,7 +109,7 @@ export default {
 .btn {
   border-radius: 1rem;
   background-color: burlywood;
-  padding: 0.25rem;
+  padding: 0.25rem 0.75rem;
   cursor: pointer;
   margin-right: 1rem;
 }
