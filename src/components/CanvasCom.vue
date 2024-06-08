@@ -149,7 +149,7 @@ export default {
 .canvas-container {
   position: relative;
   width: 60%;
-  height: 300px;
+  height: 400px;
   background: white;
   cursor: none;
   box-shadow: 0 0 3px 3px rgb(232, 232, 232);

@@ -1,10 +1,14 @@
 <template>
   <div>
     <div class="btn-container">
-      <div class="btn" @click="downloadCanvas">Download</div>
-      <div class="btn" @click="clearCanvas">Clear</div>
-      <div class="btn" @click="toggleSizeModal">Select Size</div>
-      <div class="btn" @click="toggleEraser">Toggle Eraser</div>
+      <div class="btn-section">
+        <div class="btn" @click="clearCanvas">Clear</div>
+        <div class="btn" @click="toggleSizeModal">Select Size</div>
+        <div class="btn" @click="toggleEraser">Toggle Eraser</div>
+      </div>
+      <div>
+        <div class="btn" @click="downloadCanvas">Download</div>
+      </div>
     </div>
     <div class="crayon-container">
       <div
@@ -104,14 +108,21 @@ export default {
 <style scoped>
 .btn-container {
   display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.btn-section {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 }
 
 .btn {
-  border-radius: 1rem;
-  background-color: burlywood;
+  border-radius: 0.25rem;
+  background-color: rgb(195, 195, 195);
   padding: 0.25rem 0.75rem;
   cursor: pointer;
-  margin-right: 1rem;
 }
 
 .crayon-container {
