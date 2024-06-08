@@ -143,18 +143,18 @@ export default {
 .wrapper {
   display: flex;
   justify-content: center;
+  padding: 2rem;
 }
 
 .canvas-container {
   position: relative;
   width: 60%;
-  height: 100%;
-  background: #000;
+  height: 300px;
+  background: white;
   cursor: none;
-  border-color: aquamarine;
-  border-width: 0.5rem;
-  border-style: solid;
+  box-shadow: 0 0 3px 3px rgb(232, 232, 232);
 }
+
 canvas {
   display: block;
   width: 100%;
