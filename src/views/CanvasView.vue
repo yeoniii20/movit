@@ -15,7 +15,7 @@
           backgroundColor: color,
           boxShadow:
             selectedColor === color
-              ? '0 0 10px 2px rgba(0, 0, 0, 0.5)'
+              ? '0 0 10px 2px rgba(0, 0, 0, 0.3)'
               : 'none',
         }"
         @click="selectColor(color)"
@@ -125,7 +125,7 @@ export default {
 .crayon {
   width: 30px;
   height: 60px;
-  margin: 0; 
+  margin: 0;
   border-radius: 5px;
   cursor: pointer;
   border: 2px solid transparent;
