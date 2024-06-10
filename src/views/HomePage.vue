@@ -36,7 +36,7 @@ export default {
   methods: {
     async fetchMovies() {
       const apiKey = process.env.VUE_APP_TMDB_API_KEY;
-      const url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-KR&region=KR&page=${this.page}`; // Add region parameter to fetch only Korean movies
+      const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=ko-KR&region=KR&page=${this.page}`;
       try {
         const response = await axios.get(url);
         const newMovies = response.data.results.map((movie) => ({
