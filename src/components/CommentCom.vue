@@ -1,112 +1,77 @@
 <template>
-  <div class="content">
-    <div class="header">
-      <div>
-        <h1>{{ movie.title }}</h1>
-        <h2>{{ movie.subTitle }}</h2>
-      </div>
-      <div class="user-info">
-        <span class="user-icon">👤</span>
-        <span>{{ movie.user }}</span>
-      </div>
-    </div>
-    <div class="image-section">
-      <img :src="movie.image" alt="Movie Image" class="image-placeholder" />
-      <div class="actions">
-        <button @click="$emit('share')">⬆️</button>
-        <button @click="$emit('bookmark')">⭐️</button>
-        <button @click="$emit('refresh')">🔁</button>
-        <button @click="toggleComments">💬</button>
-      </div>
-    </div>
-    <div class="description">
-      <p>{{ movie.description }}</p>
-    </div>
-    <CommentCom v-if="showComments" />
+  <div class="comment-section">
+    <h3>Comments</h3>
+    <textarea
+      v-model="newComment"
+      placeholder="Add a comment"
+      class="comment-area"
+    />
+    <button class="submit-btn" @click="addComment">Submit</button>
+    <ul>
+      <li v-for="(comment, index) in comments" :key="index">
+        {{ comment }}
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-import CommentCom from "@/components/CommentCom.vue";
-
 export default {
-  name: "ContentCom",
-  props: {
-    movie: {
-      type: Object,
-      required: true,
-    },
-  },
+  name: "CommentCom",
   data() {
     return {
-      showComments: false,
+      comments: [],
+      newComment: "",
     };
   },
   methods: {
-    toggleComments() {
-      this.showComments = !this.showComments;
-      this.$emit("toggleComments");
+    addComment() {
+      if (this.newComment.trim() !== "") {
+        this.comments.push(this.newComment);
+        this.newComment = "";
+      }
     },
-  },
-  components: {
-    CommentCom,
   },
 };
 </script>
 
 <style scoped>
-.content {
-  flex: 1;
-  padding: 20px;
-}
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.header h1 {
-  margin: 0;
-  font-size: 2em;
-}
-.header h2 {
-  margin: 0;
-  font-size: 1.5em;
-  color: #666;
-}
-.user-info {
-  display: flex;
-  align-items: center;
-}
-.user-icon {
-  font-size: 2em;
-  margin-right: 0.5em;
-}
-.image-section {
+.comment-section {
   margin-top: 20px;
-  display: flex;
-  align-items: center;
 }
-.image-placeholder {
-  width: 300px;
-  height: 400px;
-  background-color: #eaeaea;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 20px;
+
+.comment-area {
+  border-radius: 0.25em;
+  border-color: grey;
+  border-width: 0.15em;
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
 }
-.actions {
-  display: flex;
-  flex-direction: column;
+
+.comment-area::placeholder {
+  font-family: "SUITE";
+  color: grey;
+  padding: 0.25em;
 }
-.actions button {
-  background: none;
-  border: none;
-  font-size: 1.5em;
+
+.submit-btn {
+  border-radius: 0.25rem;
+  background-color: rgb(195, 195, 195);
+  padding: 0.25rem 0.75rem;
   cursor: pointer;
-  margin: 5px 0;
+  border-color: transparent;
+  margin-bottom: 10px;
 }
-.description {
-  margin-top: 20px;
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+li {
+  background: #f0f0f0;
+  margin-bottom: 5px;
+  padding: 10px;
+  border-radius: 5px;
 }
 </style>
