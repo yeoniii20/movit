@@ -47,12 +47,13 @@ export default {
   width: 100%;
   height: 100px;
   margin-bottom: 10px;
+  font-family: "SUITE";
+  padding: 0.25em;
 }
 
 .comment-area::placeholder {
   font-family: "SUITE";
   color: grey;
-  padding: 0.25em;
 }
 
 .submit-btn {
