@@ -1,7 +1,13 @@
 <template>
   <div class="detail-view">
     <SidebarCom />
-    <ContentCom :movie="movie" />
+    <ContentCom
+      :movie="movie"
+      @share="shareMovie"
+      @bookmark="bookmarkMovie"
+      @refresh="refreshPage"
+      @toggleComments="toggleComments"
+    />
   </div>
 </template>
 
@@ -20,6 +26,7 @@ export default {
   data() {
     return {
       movie: {},
+      showComments: false,
     };
   },
   created() {
@@ -42,6 +49,26 @@ export default {
       } catch (error) {
         console.error("Error fetching movie data:", error);
       }
+    },
+    shareMovie() {
+      const url = window.location.href;
+      navigator.clipboard
+        .writeText(url)
+        .then(() => {
+          alert("URL copied to clipboard!");
+        })
+        .catch((err) => {
+          console.error("Could not copy text: ", err);
+        });
+    },
+    bookmarkMovie() {
+      alert("Movie bookmarked!");
+    },
+    refreshPage() {
+      window.location.reload();
+    },
+    toggleComments() {
+      this.showComments = !this.showComments;
     },
   },
 };
