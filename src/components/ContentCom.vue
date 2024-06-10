@@ -52,7 +52,7 @@ export default {
     const profile = await getProfile();
     if (profile) {
       this.selectedIcon = profile.icon || "👤";
-      this.nickname = profile.nickname || "";
+      this.nickname = profile.nickname || "닉네임을 설정해주세요.";
     }
   },
   methods: {
