@@ -15,21 +15,40 @@
         <img :src="movie.image" alt="Movie Image" class="image-placeholder" />
         <div>
           <p class="movie-info">
-            <strong>개봉일 🎬 : </strong>{{ movie.releaseDate }}
+            <strong class="movie-info-title">개봉일 🎬 : </strong
+            >{{ movie.releaseDate }}
           </p>
           <p class="movie-info">
-            <strong>장르 🎭 : </strong> {{ movie.genres }}
+            <strong class="movie-info-title">장르 🎭 : </strong>
+            {{ movie.genres }}
           </p>
-          <p class="movie-info">상영 시간 ⏱️ : {{ movie.runtime }} minutes</p>
-          <p class="movie-info">감독 👨‍💼 : {{ movie.director }}</p>
-          <p class="movie-info">출연진 👥 : {{ movie.cast }}</p>
           <p class="movie-info">
-            평점 ⭐️ :
+            <strong class="movie-info-title">상영 시간 ⏱️ :</strong>
+            {{ movie.runtime }} minutes
+          </p>
+          <p class="movie-info">
+            <strong class="movie-info-title">감독 👨‍💼 :</strong>
+            {{ movie.director }}
+          </p>
+          <p class="movie-info">
+            <strong class="movie-info-title">출연진 👥 :</strong>
+            {{ movie.cast }}
+          </p>
+          <p class="movie-info">
+            <strong class="movie-info-title">평점 ⭐️ :</strong>
             {{ movie.rating }} ({{ movie.votes }}
             votes)
           </p>
-          <p class="movie-info">예산 💰 : ${{ movie.budget }}</p>
-          <p class="movie-info">수익 💸 : ${{ movie.revenue }}</p>
+          <p class="movie-info">
+            <strong class="movie-info-title">예산 💰 :</strong> ${{
+              movie.budget
+            }}
+          </p>
+          <p class="movie-info">
+            <strong class="movie-info-title">수익 💸 :</strong> ${{
+              movie.revenue
+            }}
+          </p>
         </div>
       </div>
       <div class="action-container">
@@ -232,12 +251,11 @@ export default {
   text-decoration: underline;
   color: #555;
 }
-.info-title {
-  background-color: yellow;
-  color: blue;
-}
-
-.movie-info {
+.movie-info-title {
+  font-size: 20px;
   font-weight: bold;
+}
+.movie-info {
+  font-size: 18px;
 }
 </style>
