@@ -47,6 +47,13 @@ export default {
   margin: 1em;
   cursor: pointer;
 }
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.card:active {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
 
 .card-image {
   width: 100%;
