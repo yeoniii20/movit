@@ -2,12 +2,13 @@
   <div class="my-page">
     <h1>My Page</h1>
     <div class="profile-section">
-      <h2>Select Your Profile Icon</h2>
-      <ProfileCom @updateProfile="updateProfileIcon" />
+      <h2>Select Your Profile Icon and Nickname</h2>
+      <ProfileCom @updateProfile="updateProfile" />
     </div>
     <div class="current-profile">
-      <h2>Your Current Profile Icon</h2>
+      <h2>Your Current Profile</h2>
       <span class="selected-icon">{{ selectedIcon }}</span>
+      <div class="nickname">{{ nickname }}</div>
     </div>
   </div>
 </template>
@@ -23,19 +24,26 @@ export default {
   },
   data() {
     return {
-      selectedIcon: "👤", // 기본 아이콘
+      selectedIcon: "👤",
+      nickname: "",
     };
   },
   async created() {
     const profile = await getProfile();
     if (profile) {
-      this.selectedIcon = profile.icon;
+      this.selectedIcon = profile.icon || "👤";
+      this.nickname = profile.nickname || "";
     }
   },
   methods: {
-    async updateProfileIcon(newIcon) {
-      this.selectedIcon = newIcon;
-      await saveProfile({ icon: newIcon });
+    async updateProfile(data) {
+      if (data.icon) {
+        this.selectedIcon = data.icon;
+      }
+      if (data.nickname) {
+        this.nickname = data.nickname;
+      }
+      await saveProfile({ icon: this.selectedIcon, nickname: this.nickname });
     },
   },
 };
@@ -54,5 +62,10 @@ export default {
 
 .selected-icon {
   font-size: 2em;
+}
+
+.nickname {
+  font-size: 1.5em;
+  margin-top: 10px;
 }
 </style>
