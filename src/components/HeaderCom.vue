@@ -8,6 +8,7 @@
         <li><a :href="router.resolve('/canvas').href">Canvas</a></li>
         <li><a :href="router.resolve('/about').href">About</a></li>
         <li><a :href="router.resolve('/detail').href">Detail</a></li>
+        <li><a :href="router.resolve('/myPage').href">My Page</a></li>
       </ul>
     </nav>
   </header>
