@@ -5,7 +5,7 @@
         <h1>{{ movie.title }}</h1>
         <h2>{{ movie.subTitle }}</h2>
       </div>
-      <div class="user-info">
+      <div class="user-info" @click="profileClick">
         <span class="user-icon">👤</span>
         <span>{{ movie.user }}</span>
       </div>
@@ -28,6 +28,7 @@
 
 <script>
 import CommentCom from "@/components/CommentCom.vue";
+import { useRouter } from "vue-router";
 
 export default {
   name: "ContentCom",
@@ -42,10 +43,17 @@ export default {
       showComments: false,
     };
   },
+  setup() {
+    const router = useRouter();
+    return { router };
+  },
   methods: {
     toggleComments() {
       this.showComments = !this.showComments;
       this.$emit("toggleComments");
+    },
+    profileClick() {
+      this.router.push({ path: "/myPage" });
     },
   },
   components: {
@@ -76,6 +84,7 @@ export default {
 .user-info {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .user-icon {
   font-size: 2em;
