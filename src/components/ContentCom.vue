@@ -13,19 +13,22 @@
     <div class="image-section">
       <img :src="movie.image" alt="Movie Image" class="image-placeholder" />
       <div class="actions">
-        <button>⬆️</button>
-        <button>⭐️</button>
-        <button>🔁</button>
-        <button>💬</button>
+        <button @click="$emit('share')">⬆️</button>
+        <button @click="$emit('bookmark')">⭐️</button>
+        <button @click="$emit('refresh')">🔁</button>
+        <button @click="toggleComments">💬</button>
       </div>
     </div>
     <div class="description">
       <p>{{ movie.description }}</p>
     </div>
+    <CommentCom v-if="showComments" />
   </div>
 </template>
 
 <script>
+import CommentCom from "@/components/CommentCom.vue";
+
 export default {
   name: "ContentCom",
   props: {
@@ -33,6 +36,20 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  data() {
+    return {
+      showComments: false,
+    };
+  },
+  methods: {
+    toggleComments() {
+      this.showComments = !this.showComments;
+      this.$emit("toggleComments");
+    },
+  },
+  components: {
+    CommentCom,
   },
 };
 </script>
