@@ -5,27 +5,32 @@
         <h1>{{ movie.title }}</h1>
         <h2>{{ movie.subTitle }}</h2>
       </div>
-      <div class="user-info">
-        <span class="user-icon">👤</span>
-        <span>{{ movie.user }}</span>
+      <div class="user-info" @click="profileClick">
+        <span class="user-icon">{{ selectedIcon }}</span>
+        <span>{{ nickname }}</span>
       </div>
     </div>
     <div class="image-section">
       <img :src="movie.image" alt="Movie Image" class="image-placeholder" />
       <div class="actions">
-        <button>⬆️</button>
-        <button>⭐️</button>
-        <button>🔁</button>
-        <button>💬</button>
+        <button @click="$emit('share')">⬆️</button>
+        <button @click="$emit('bookmark')">⭐️</button>
+        <button @click="$emit('refresh')">🔁</button>
+        <button @click="toggleComments">💬</button>
       </div>
     </div>
     <div class="description">
       <p>{{ movie.description }}</p>
     </div>
+    <CommentCom v-if="showComments" />
   </div>
 </template>
 
 <script>
+import CommentCom from "@/components/CommentCom.vue";
+import { useRouter } from "vue-router";
+import { getProfile } from "@/utils/db";
+
 export default {
   name: "ContentCom",
   props: {
@@ -33,6 +38,34 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  data() {
+    return {
+      showComments: false,
+    };
+  },
+  setup() {
+    const router = useRouter();
+    return { router };
+  },
+  async created() {
+    const profile = await getProfile();
+    if (profile) {
+      this.selectedIcon = profile.icon || "👤";
+      this.nickname = profile.nickname || "";
+    }
+  },
+  methods: {
+    toggleComments() {
+      this.showComments = !this.showComments;
+      this.$emit("toggleComments");
+    },
+    profileClick() {
+      this.router.push({ path: "/myPage" });
+    },
+  },
+  components: {
+    CommentCom,
   },
 };
 </script>
@@ -59,6 +92,7 @@ export default {
 .user-info {
   display: flex;
   align-items: center;
+  cursor: pointer;
 }
 .user-icon {
   font-size: 2em;

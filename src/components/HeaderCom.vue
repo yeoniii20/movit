@@ -1,13 +1,14 @@
 <template>
   <header class="header">
     <nav>
-      <div class="logo">MovieSearch</div>
+      <div class="logo">Movit</div>
       <ul>
-        <li><router-link to="/">Main</router-link></li>
-        <li><router-link to="/home">Home</router-link></li>
-        <li><router-link to="/canvas">Canvas</router-link></li>
-        <li><router-link to="/about">About</router-link></li>
-        <li><router-link to="/detail">Detail</router-link></li>
+        <li><a :href="router.resolve('/').href">Main</a></li>
+        <li><a :href="router.resolve('/home').href">Home</a></li>
+        <li><a :href="router.resolve('/canvas').href">Canvas</a></li>
+        <li><a :href="router.resolve('/about').href">About</a></li>
+        <li><a :href="router.resolve('/detail').href">Detail</a></li>
+        <li><a :href="router.resolve('/myPage').href">My Page</a></li>
       </ul>
     </nav>
   </header>
@@ -15,9 +16,16 @@
 
 <script>
 import "../assets/styles.css";
+import { useRouter } from "vue-router";
 
 export default {
   name: "HeaderCom",
+  setup() {
+    const router = useRouter();
+    return {
+      router,
+    };
+  },
 };
 </script>
 
@@ -57,12 +65,12 @@ li {
   margin-left: 1em;
 }
 
-router-link {
+a {
   color: white;
   text-decoration: none;
 }
 
-router-link:hover {
+a:hover {
   text-decoration: underline;
 }
 </style>

@@ -1,22 +1,24 @@
 <template>
-  <div
-    class="canvas-container"
-    @mousemove="draw"
-    @mousedown="startDrawing"
-    @mouseup="stopDrawing"
-    @mouseleave="stopDrawing"
-  >
-    <canvas ref="canvas"></canvas>
+  <div class="wrapper">
     <div
-      class="cursor"
-      :style="{
-        left: cursorX + 'px',
-        top: cursorY + 'px',
-        backgroundColor: isEraser ? 'white' : selectedColor,
-        width: toolSize + 'px',
-        height: toolSize + 'px',
-      }"
-    ></div>
+      class="canvas-container"
+      @mousemove="draw"
+      @mousedown="startDrawing"
+      @mouseup="stopDrawing"
+      @mouseleave="stopDrawing"
+    >
+      <canvas ref="canvas"></canvas>
+      <div
+        class="cursor"
+        :style="{
+          left: cursorX + 'px',
+          top: cursorY + 'px',
+          backgroundColor: isEraser ? 'white' : selectedColor,
+          width: toolSize + 'px',
+          height: toolSize + 'px',
+        }"
+      />
+    </div>
   </div>
 </template>
 
@@ -138,13 +140,21 @@ export default {
 </script>
 
 <style scoped>
+.wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
 .canvas-container {
   position: relative;
-  width: 100%;
-  height: 100%;
-  background: #000;
+  width: 60%;
+  height: 400px;
+  background: white;
   cursor: none;
+  box-shadow: 0 0 3px 3px rgb(232, 232, 232);
 }
+
 canvas {
   display: block;
   width: 100%;
@@ -155,5 +165,8 @@ canvas {
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
+  border-color: #fff;
+  border-width: 0.1rem;
+  border-style: solid;
 }
 </style>

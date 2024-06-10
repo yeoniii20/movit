@@ -1,40 +1,30 @@
-<script setup></script>
-
 <template>
-  <!-- <nav>
-    <Routerlink to="/">Home</Routerlink>
-    <span> | </span>
-    <RouterLink to="/about">About</RouterLink>
-  </nav> -->
-  <main>
+  <div id="app">
     <HeaderCom />
-    <RouterView></RouterView>
+    <main>
+      <RouterView></RouterView>
+    </main>
     <FooterCom />
-  </main>
+  </div>
 </template>
 
-<script>
+<script setup>
 import HeaderCom from "./components/HeaderCom.vue";
 import FooterCom from "./components/FooterCom.vue";
-
-export default {
-  name: "App",
-  components: {
-    HeaderCom,
-    FooterCom,
-  },
-};
 </script>
+
 <style>
 body {
   margin: 0;
   font-family: "SUITE", sans-serif;
+  overflow: hidden; /* 전체 스크롤을 없앰 */
 }
 
 #app {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 header {
@@ -49,7 +39,8 @@ header {
 
 main {
   flex: 1;
-  margin-top: 60px; /* 헤더의 높이만큼 마진 */
+  overflow-y: auto; /* main 영역에만 스크롤이 생기도록 함 */
+  margin-top: 60px; 
 }
 
 footer {
