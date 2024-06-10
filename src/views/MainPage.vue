@@ -6,7 +6,9 @@
         :key="index"
         class="popcorn"
         :style="popcornStyle(popcorn)"
-      ></div>
+      >
+        🍿
+      </div>
     </div>
   </div>
 </template>
@@ -69,10 +71,7 @@ export default {
 }
 
 .popcorn {
-  width: 20px;
-  height: 20px;
-  background-color: yellow;
-  border-radius: 50%;
+  font-size: 24px;
   position: absolute;
   top: 0;
   animation-name: fall;
