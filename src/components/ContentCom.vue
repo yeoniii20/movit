@@ -14,17 +14,22 @@
       <div class="image-box">
         <img :src="movie.image" alt="Movie Image" class="image-placeholder" />
         <div>
-          <p><strong>Release Date:</strong> {{ movie.releaseDate }}</p>
-          <p><strong>Genres:</strong> {{ movie.genres }}</p>
-          <p><strong>Runtime:</strong> {{ movie.runtime }} minutes</p>
-          <p><strong>Director:</strong> {{ movie.director }}</p>
-          <p><strong>Cast:</strong> {{ movie.cast }}</p>
-          <p>
-            <strong>Rating:</strong> {{ movie.rating }} ({{ movie.votes }}
+          <p class="movie-info">
+            <strong>개봉일 🎬 : </strong>{{ movie.releaseDate }}
+          </p>
+          <p class="movie-info">
+            <strong>장르 🎭 : </strong> {{ movie.genres }}
+          </p>
+          <p class="movie-info">상영 시간 ⏱️ : {{ movie.runtime }} minutes</p>
+          <p class="movie-info">감독 👨‍💼 : {{ movie.director }}</p>
+          <p class="movie-info">출연진 👥 : {{ movie.cast }}</p>
+          <p class="movie-info">
+            평점 ⭐️ :
+            {{ movie.rating }} ({{ movie.votes }}
             votes)
           </p>
-          <p><strong>Budget:</strong> ${{ movie.budget }}</p>
-          <p><strong>Revenue:</strong> ${{ movie.revenue }}</p>
+          <p class="movie-info">예산 💰 : ${{ movie.budget }}</p>
+          <p class="movie-info">수익 💸 : ${{ movie.revenue }}</p>
         </div>
       </div>
       <div class="action-container">
@@ -226,5 +231,13 @@ export default {
 .play-trailer-btn:active {
   text-decoration: underline;
   color: #555;
+}
+.info-title {
+  background-color: yellow;
+  color: blue;
+}
+
+.movie-info {
+  font-weight: bold;
 }
 </style>
