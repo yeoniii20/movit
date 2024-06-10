@@ -44,7 +44,10 @@
         </button>
       </div>
       <CommentCom v-if="showComments" />
-      <div v-if="movie.similarMovies.length" class="similar-movies">
+      <div
+        v-if="movie.similarMovies && movie.similarMovies.length"
+        class="similar-movies"
+      >
         <h3>Similar Movies:</h3>
         <div class="similar-movies-container">
           <div
@@ -128,6 +131,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 3em;
 }
 .header h1 {
   margin: 0;
