@@ -3,8 +3,7 @@
     <div class="btn-container">
       <div class="btn-section">
         <div class="btn" @click="clearCanvas">Clear</div>
-        <div class="btn" @click="toggleSizeModal">Select Size</div>
-        <div class="btn" @click="toggleEraser">Toggle Eraser</div>
+        <div class="btn" @click="toggleEraser">Eraser</div>
       </div>
       <div>
         <div class="btn" @click="downloadCanvas">Download</div>
@@ -25,18 +24,26 @@
         @click="selectColor(color)"
       />
     </div>
+    <div class="size-container">
+      <div
+        v-for="size in sizes"
+        :key="size"
+        class="size"
+        :style="{
+          width: size + 'px',
+          height: size + 'px',
+        }"
+        :class="{ selected: toolSize === size }"
+        @click="selectToolSize(size)"
+      >
+        <!-- {{ size }} -->
+      </div>
+    </div>
     <CanvasCom
       ref="canvasCom"
       :selectedColor="selectedColor"
       :isEraser="isEraser"
       :toolSize="toolSize"
-    />
-    <CanvasModal
-      v-if="showSizeModal"
-      :sizes="sizes"
-      :selectedSize="toolSize"
-      @close="toggleSizeModal"
-      @select-size="selectToolSize"
     />
   </div>
 </template>
@@ -44,20 +51,17 @@
 <script>
 import { ref } from "vue";
 import CanvasCom from "@/components/CanvasCom.vue";
-import CanvasModal from "@/components/Modal/CanvasModal.vue";
 import { COLOR_PALETTE } from "@/utils/colorPalette";
 
 export default {
   name: "CanvasView",
   components: {
     CanvasCom,
-    CanvasModal,
   },
   setup() {
     const canvasCom = ref(null);
     const selectedColor = ref("red");
     const isEraser = ref(false);
-    const showSizeModal = ref(false);
     const toolSize = ref(5);
     const sizes = ref([5, 10, 15, 20]);
 
@@ -74,10 +78,6 @@ export default {
       canvasCom.value.clearCanvas();
     };
 
-    const toggleSizeModal = () => {
-      showSizeModal.value = !showSizeModal.value;
-    };
-
     const selectToolSize = (size) => {
       toolSize.value = size;
     };
@@ -90,13 +90,11 @@ export default {
       canvasCom,
       downloadCanvas,
       clearCanvas,
-      toggleSizeModal,
       selectToolSize,
       selectColor,
       toggleEraser,
       selectedColor,
       isEraser,
-      showSizeModal,
       toolSize,
       sizes,
       COLOR_PALETTE,
@@ -141,5 +139,27 @@ export default {
   cursor: pointer;
   border: 2px solid transparent;
   transition: box-shadow 0.3s ease;
+}
+
+.size-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+  align-items: center;
+}
+
+.size {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+}
+
+.size.selected {
+  background: #eee;
+  border-color: #333;
 }
 </style>
