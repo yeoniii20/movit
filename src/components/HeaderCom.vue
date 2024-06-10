@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <nav>
-      <div class="logo">MovieSearch</div>
+      <div class="logo">Movit</div>
       <ul>
         <li><a :href="router.resolve('/').href">Main</a></li>
         <li><a :href="router.resolve('/home').href">Home</a></li>
