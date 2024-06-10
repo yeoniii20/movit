@@ -40,7 +40,7 @@ header {
 main {
   flex: 1;
   overflow-y: auto; /* main 영역에만 스크롤이 생기도록 함 */
-  margin-top: 60px; 
+  margin-top: 60px;
 }
 
 footer {
