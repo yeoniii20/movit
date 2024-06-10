@@ -14,6 +14,7 @@
 
 <script>
 import ProfileCom from "@/components/ProfileCom.vue";
+import { getProfile, saveProfile } from "@/utils/db";
 
 export default {
   name: "MyPage",
@@ -25,9 +26,16 @@ export default {
       selectedIcon: "👤", // 기본 아이콘
     };
   },
+  async created() {
+    const profile = await getProfile();
+    if (profile) {
+      this.selectedIcon = profile.icon;
+    }
+  },
   methods: {
-    updateProfileIcon(newIcon) {
+    async updateProfileIcon(newIcon) {
       this.selectedIcon = newIcon;
+      await saveProfile({ icon: newIcon });
     },
   },
 };
