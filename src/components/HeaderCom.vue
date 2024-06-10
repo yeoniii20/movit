@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <nav>
-      <div class="logo">Movit</div>
+      <div class="logo"><img src="@/assets/image/retro_small.png" />Movit</div>
       <ul>
         <li><a :href="router.resolve('/').href">Main</a></li>
         <li><a :href="router.resolve('/home').href">Home</a></li>
@@ -50,6 +50,8 @@ nav {
 }
 
 .logo {
+  display: flex;
+  gap: 0.5em;
   font-size: 1.5em;
   font-weight: bold;
 }
