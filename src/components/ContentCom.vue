@@ -6,7 +6,7 @@
         <h2>{{ movie.subTitle }}</h2>
       </div>
       <div class="user-info" @click="profileClick">
-        <span class="user-icon">👤</span>
+        <span class="user-icon">{{ selectedIcon }}</span>
         <span>{{ movie.user }}</span>
       </div>
     </div>
@@ -29,6 +29,7 @@
 <script>
 import CommentCom from "@/components/CommentCom.vue";
 import { useRouter } from "vue-router";
+import { getProfile } from "@/utils/db";
 
 export default {
   name: "ContentCom",
@@ -46,6 +47,12 @@ export default {
   setup() {
     const router = useRouter();
     return { router };
+  },
+  async created() {
+    const profile = await getProfile();
+    if (profile) {
+      this.selectedIcon = profile.icon;
+    }
   },
   methods: {
     toggleComments() {
