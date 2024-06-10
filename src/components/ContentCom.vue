@@ -7,7 +7,7 @@
       </div>
       <div class="user-info" @click="profileClick">
         <span class="user-icon">{{ selectedIcon }}</span>
-        <span>{{ movie.user }}</span>
+        <span>{{ nickname }}</span>
       </div>
     </div>
     <div class="image-section">
@@ -51,7 +51,8 @@ export default {
   async created() {
     const profile = await getProfile();
     if (profile) {
-      this.selectedIcon = profile.icon;
+      this.selectedIcon = profile.icon || "👤";
+      this.nickname = profile.nickname || "";
     }
   },
   methods: {
