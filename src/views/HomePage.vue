@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <h1>Welcome to Movit</h1>
-    <p>Search for your favorite movies and more.</p>
+  <div class="wrapper">
+    <h1 class="title">Welcome to Movit</h1>
+    <p class="description">Search for your favorite movies and more.</p>
     <div class="card-container">
       <CardCom
         v-for="(movie, index) in movies"
@@ -36,7 +36,7 @@ export default {
   methods: {
     async fetchMovies() {
       const apiKey = process.env.VUE_APP_TMDB_API_KEY;
-      const url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=ko-KR&region=KR&page=${this.page}`; // Add region parameter to fetch only Korean movies
+      const url = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=ko-KR&region=KR&page=${this.page}`;
       try {
         const response = await axios.get(url);
         const newMovies = response.data.results.map((movie) => ({
@@ -63,13 +63,22 @@ export default {
 </script>
 
 <style scoped>
+.wrapper {
+  background-color: #0f0f0f; /* Primary */
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
 h1 {
   text-align: center;
-  margin-top: 2em;
+  margin-top: 0.5em;
+  color: #d4d4d4; /* Secondary */
 }
 
 p {
   text-align: center;
+  color: #969696; /* Tertiary */
+  margin-bottom: 5em;
 }
 
 .card-container {
@@ -89,9 +98,28 @@ p {
 
 .load-more-btn {
   border-radius: 0.25rem;
-  background-color: rgb(195, 195, 195);
-  padding: 0.25rem 0.75rem;
+  /* background-color: #292929; */
+  background-color: rgb(248, 40, 254, 0.3);
+  color: #ffffff;
+  padding: 0.5rem 1rem;
   cursor: pointer;
-  border-color: transparent;
+  border: 2px solid transparent;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  font-family: "SUITE";
+  font-size: 16px;
+}
+
+.load-more-btn:hover {
+  /*  background-color: #383838;
+  border-color: #f828fe; */
+  background-color: rgb(248, 40, 254, 0.4);
+}
+
+.load-more-btn:active {
+  background-color: rgb(248, 40, 254, 0.5);
+}
+
+.load-more-btn .accent {
+  color: #f828fe;
 }
 </style>

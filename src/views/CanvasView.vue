@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <div class="btn-container">
       <div class="btn-section">
         <div class="btn" @click="clearCanvas">Clear</div>
@@ -104,6 +104,10 @@ export default {
 </script>
 
 <style scoped>
+.wrapper {
+  background-color: #0f0f0f;
+}
+
 .btn-container {
   display: flex;
   justify-content: space-between;
@@ -118,7 +122,8 @@ export default {
 
 .btn {
   border-radius: 0.25rem;
-  background-color: rgb(195, 195, 195);
+  background-color: rgb(248, 40, 254, 0.3);
+  color: rgb(255, 255, 255);
   padding: 0.25rem 0.75rem;
   cursor: pointer;
 }
