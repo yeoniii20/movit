@@ -1,14 +1,16 @@
 <template>
   <header class="header">
     <nav>
-      <div class="logo"><img src="@/assets/image/retro_small.png" />Movit</div>
+      <div class="logo" @click="navigateTo('/')">
+        <img src="@/assets/image/retro_small.png" />Movit
+      </div>
       <ul>
-        <li><a :href="router.resolve('/').href">Main</a></li>
-        <li><a :href="router.resolve('/home').href">Home</a></li>
-        <li><a :href="router.resolve('/canvas').href">Canvas</a></li>
-        <li><a :href="router.resolve('/about').href">About</a></li>
-        <li><a :href="router.resolve('/detail').href">Detail</a></li>
-        <li><a :href="router.resolve('/myPage').href">My Page</a></li>
+        <!-- <li><button @click="navigateTo('/')">Main</button></li> -->
+        <li><button @click="navigateTo('/home')">Home</button></li>
+        <li><button @click="navigateTo('/canvas')">Canvas</button></li>
+        <!-- <li><button @click="navigateTo('/about')">About</button></li> -->
+        <!-- <li><button @click="navigateTo('/detail')">Detail</button></li> -->
+        <li><button @click="navigateTo('/myPage')">My Page</button></li>
       </ul>
     </nav>
   </header>
@@ -22,8 +24,13 @@ export default {
   name: "HeaderCom",
   setup() {
     const router = useRouter();
+
+    const navigateTo = (path) => {
+      router.push(path);
+    };
+
     return {
-      router,
+      navigateTo,
     };
   },
 };
@@ -31,7 +38,7 @@ export default {
 
 <style scoped>
 .header {
-  background-color: #333;
+  background-color: #292929;
   color: white;
   padding: 1em 0;
   position: fixed;
@@ -54,6 +61,7 @@ nav {
   gap: 0.5em;
   font-size: 1.5em;
   font-weight: bold;
+  cursor: pointer;
 }
 
 ul {
@@ -67,12 +75,16 @@ li {
   margin-left: 1em;
 }
 
-a {
+button {
+  background: none;
+  border: none;
   color: white;
+  cursor: pointer;
+  font: inherit;
   text-decoration: none;
 }
 
-a:hover {
-  text-decoration: underline;
+button:hover {
+  color: #ddd; /* Optional: Change the color on hover instead of underlining */
 }
 </style>
