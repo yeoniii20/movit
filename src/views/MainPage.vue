@@ -1,44 +1,61 @@
 <template>
   <div class="scroll-container" @scroll="handleScroll">
+    <div class="counter">
+      <div v-for="(count, emoji) in caughtCounts" :key="emoji">
+        {{ emoji }}: {{ count }}
+      </div>
+    </div>
     <div class="circle-container" ref="circleContainer">
       <div
         v-for="(item, index) in items"
         :key="index"
         class="falling-item"
         :style="itemStyle(item)"
+        @animationiteration="resetPosition(index)"
       >
         {{ item.emoji }}
       </div>
     </div>
-    <div v-if="showText" class="movit-text">Movit</div>
+    <div class="movit-text" @click="goHome">Movit</div>
+    <div
+      class="custom-cursor"
+      :style="{ top: cursorY + 'px', left: cursorX + 'px' }"
+    ></div>
   </div>
 </template>
 
 <script>
-import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 
 export default {
   name: "MainPage",
   setup() {
+    const router = useRouter();
     const circleContainer = ref(null);
     const items = ref([]);
-    const itemCount = 30; // 아이템의 개수
+    const itemCount = 30;
     const showText = ref(false);
+    const cursorX = ref(0);
+    const cursorY = ref(0);
+    const caughtCounts = ref({ "🍿": 0, "🎥": 0, "🥤": 0 });
 
-    const emojis = ["🍿", "🎥", "🥤"]; // 팝콘, 3D 안경, 콜라 이모티콘
+    const emojis = ["🍿", "🎥", "🥤"];
 
     const createItem = () => {
       return {
         emoji: emojis[Math.floor(Math.random() * emojis.length)],
         left: Math.random() * window.innerWidth + "px",
-        animationDuration: Math.random() * 2 + 3 + "s", // 애니메이션 속도 랜덤 (3초에서 5초 사이)
-        animationDelay: Math.random() * 1 + "s", // 애니메이션 딜레이 랜덤 (0초에서 1초 사이)
+        top: -50,
+        animationDuration: Math.random() * 2 + 3 + "s",
+        animationDelay: Math.random() * 1 + "s",
       };
     };
 
     const itemStyle = (item) => {
       return {
         left: item.left,
+        top: item.top + "px",
         animationDuration: item.animationDuration,
         animationDelay: item.animationDelay,
       };
@@ -48,11 +65,41 @@ export default {
       const scrollPosition =
         window.scrollY || document.documentElement.scrollTop;
       if (scrollPosition > 100) {
-        // 원하는 스크롤 위치 설정
         showText.value = true;
       } else {
         showText.value = false;
       }
+    };
+
+    const handleMouseMove = (event) => {
+      cursorX.value = event.clientX;
+      cursorY.value = event.clientY;
+      checkForCatch(event.clientX, event.clientY);
+    };
+
+    const checkForCatch = (mouseX, mouseY) => {
+      items.value.forEach((item, index) => {
+        const itemElement = circleContainer.value.children[index];
+        const rect = itemElement.getBoundingClientRect();
+        if (
+          mouseX >= rect.left &&
+          mouseX <= rect.right &&
+          mouseY >= rect.top &&
+          mouseY <= rect.bottom
+        ) {
+          items.value.splice(index, 1);
+          items.value.push(createItem());
+          caughtCounts.value[item.emoji] += 1;
+        }
+      });
+    };
+
+    const resetPosition = (index) => {
+      items.value[index].top = -50;
+    };
+
+    const goHome = () => {
+      router.push({ path: "/home" });
     };
 
     onMounted(() => {
@@ -60,14 +107,25 @@ export default {
         items.value.push(createItem());
       }
       window.addEventListener("scroll", handleScroll);
+      window.addEventListener("mousemove", handleMouseMove);
+    });
+
+    onBeforeUnmount(() => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("mousemove", handleMouseMove);
     });
 
     return {
       circleContainer,
+      resetPosition,
+      goHome,
       items,
       itemCount,
       itemStyle,
       showText,
+      cursorX,
+      cursorY,
+      caughtCounts,
     };
   },
 };
@@ -78,8 +136,20 @@ export default {
   background-color: black;
   overflow: hidden;
   position: relative;
-  height: 100vh;
-  cursor: url("@/assets/image/retro_small.png"), auto;
+  height: 150vh;
+  cursor: none;
+}
+
+.counter {
+  display: flex;
+  gap: 30px;
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 1.5em;
+  z-index: 1000;
 }
 
 .circle-container {
@@ -87,6 +157,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .falling-item {
@@ -103,19 +174,37 @@ export default {
     transform: translateY(-100px);
   }
   100% {
-    transform: translateY(100vh);
+    transform: translateY(150vh);
   }
 }
 
 .movit-text {
-  position: fixed;
-  bottom: 20px;
+  position: absolute;
+  bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 2em;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.5);
+  color: #d4d4d4;
+  background-color: rgb(248, 40, 254, 0.3);
   padding: 10px 20px;
   border-radius: 10px;
+  z-index: 1000;
+}
+
+.custom-cursor {
+  width: 50px;
+  height: 50px;
+  background-image: url("@/assets/image/retro_small.png");
+  background-size: cover;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: background-color 0.2s;
+  z-index: 1000;
+}
+
+.btn {
+  color: #fff;
 }
 </style>
