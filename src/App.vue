@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <HeaderCom />
+    <div class="header-container">
+      <HeaderCom />
+    </div>
     <main>
       <RouterView></RouterView>
     </main>
@@ -17,7 +19,7 @@ import FooterCom from "./components/FooterCom.vue";
 body {
   margin: 0;
   font-family: "SUITE", sans-serif;
-  overflow: hidden; /* 전체 스크롤을 없앰 */
+  overflow: hidden;
 }
 
 #app {
@@ -25,6 +27,10 @@ body {
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
+}
+
+.header-container {
+  margin-bottom: 60px;
 }
 
 header {
@@ -39,8 +45,7 @@ header {
 
 main {
   flex: 1;
-  overflow-y: auto; /* main 영역에만 스크롤이 생기도록 함 */
-  margin-top: 60px;
+  overflow-y: auto;
 }
 
 footer {
