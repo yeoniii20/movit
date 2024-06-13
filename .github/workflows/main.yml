@@ -1,0 +1,29 @@
+name: CI/CD Pipeline # 워크플로우 이름
+
+on:
+  push: # push 이벤트가 발생할 때 트리거
+    branches: [ main ] # main 브랜치에 푸시될 때 실행
+  pull_request: # pull_request 이벤트가 발생할 때 트리거
+    branches: [ main ] # main 브랜치로의 풀 리퀘스트가 열릴 때 실행
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # 최신 Ubuntu 환경에서 실행
+
+    steps:
+    - uses: actions/checkout@v2 # GitHub Actions에서 제공하는 코드를 체크아웃하는 액션
+      # 최신 코드를 체크아웃하여 작업 디렉토리에 가져옴
+
+    - name: Set up Node.js # Node.js 설정 단계
+      uses: actions/setup-node@v2 # GitHub Actions에서 제공하는 Node.js 설정 액션
+      with:
+        node-version: '20.10.0' # 사용하려는 Node.js 버전
+
+    - run: npm install # 프로젝트 의존성 설치
+      # package.json에 정의된 종속성을 설치
+
+    - run: npm run build # 프로젝트 빌드
+      # 빌드 스크립트를 실행하여 프로젝트를 빌드
+
+    - run: npm run lint # 코드 린트
+      # 린트 스크립트를 실행하여 코드 스타일과 규칙을 검사.
