@@ -46,6 +46,7 @@ header {
 main {
   flex: 1;
   overflow-y: auto;
+  background-color: #0f0f0f;
 }
 
 footer {
