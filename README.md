@@ -17,6 +17,7 @@ Movit을 통해 영화에 대한 경험을 더욱 특별하고 즐겁게 경험�
 ### 🛠️기술 스택🛠️
 
 | Framework |   Vue.js |
+| --- | --- |
 | local DB |   IndexedDB (idb library) |
 | 상태관리 |   Vuex |
 | Style |   Scoped CSS |
