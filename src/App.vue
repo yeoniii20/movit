@@ -4,7 +4,9 @@
       <HeaderCom />
     </div>
     <main>
-      <RouterView></RouterView>
+      <div class="main-container">
+        <RouterView></RouterView>
+      </div>
     </main>
     <FooterCom />
   </div>
@@ -31,6 +33,11 @@ body {
 
 .header-container {
   margin-bottom: 60px;
+}
+
+.main-container {
+  padding-left: 12%;
+  padding-right: 12%;
 }
 
 header {
