@@ -2,11 +2,11 @@
   <div class="my-page">
     <h1>My Page</h1>
     <div class="profile-section">
-      <h2>Select Your Profile Icon and Nickname</h2>
+      <h2 class="des">Select Your Profile Icon and Nickname</h2>
       <ProfileCom @updateProfile="updateProfile" />
     </div>
     <div class="current-profile">
-      <h2>Your Current Profile</h2>
+      <h2 class="current">Your Current Profile</h2>
       <span class="selected-icon">{{ selectedIcon }}</span>
       <div class="nickname">{{ nickname }}</div>
     </div>
@@ -50,9 +50,25 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  color: white;
+}
+
+h2 {
+  color: white;
+}
+
 .my-page {
-  padding: 20px;
+  padding: 16px;
   text-align: center;
+}
+
+.des {
+  margin-bottom: 2em;
+}
+
+.current {
+  margin-top: 2em;
 }
 
 .profile-section,
@@ -67,5 +83,6 @@ export default {
 .nickname {
   font-size: 1.5em;
   margin-top: 10px;
+  color: white;
 }
 </style>

@@ -1,24 +1,83 @@
-# vue_test
+# 🎥Movit🖤
 
-## Project setup
-```
-npm install
-```
+Movie + love it 두 단어가 결합되어 만들어진 **Movit**은 영화에 대한 애정의 의미를 담고 있습니다. 
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+**Movie:** 단순한 영화가 아닌, 사용자가 사랑하고 즐기는 스토리와 감동을 의미합니다. Movit은 사람들이 좋아하는 영화, 새로운 영화, 다양한 영화 정보를 제공합니다.
 
-### Compiles and minifies for production
-```
-npm run build
-```
+**Love it**: 영화 감상의 매 순간을 사랑하고 즐기는 것을 의미합니다. Movit은 사용자들이 영화를 더욱 즐겁게 감상할 수 있도록 돕습니다.
 
-### Lints and fixes files
-```
-npm run lint
-```
+Movit을 통해 영화에 대한 경험을 더욱 특별하고 즐겁게 경험했으면 좋겠습니다. 💟
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+<br/>
+<br/>
+<br/>
+
+
+### 🛠️기술 스택🛠️
+
+| Framework |   Vue.js |
+| --- | --- |
+| local DB |   IndexedDB (idb library) |
+| 상태관리 |   Vuex |
+| Style |   Scoped CSS |
+| API |   TMDB API |
+| HTTP Client |   Axios |
+
+<br/>
+<br/>
+
+### 🔰Vue.js 프레임워크 이해 및 활용
+
+- Vue.js를 사용하여 SPA(Single Page Application)를 구축하고, 컴포넌트 기반 아키텍처의 장점을 경험합니다.
+- Vue Router를 활용하여 다중 페이지 내비게이션을 구현합니다.
+- Vuex를 사용하여 애플리케이션 상태 관리를 효율적으로 수행합니다.
+
+<br/>
+<br/>
+
+### 🤖로컬 데이터베이스 (Indexed DB) 사용
+
+⇒ IndexedDB는 클라이언트 측에서 대용량 구조화된 데이터를 저장할 수 있는 저수준 API입니다. db 라이브러리를 사용하여 IndexedDB의 비동기 API를 간소화 했습니다.
+
+**주요 기능**
+
+- IndexedDB 데이터베이스 초기화 및 업그레이드
+- profile 데이터 저장 및 조회 기능 구현
+- 데이터베이스 스키마 설계 (스토어, 키, 인덱스 등)
+
+<br/>
+<br/>
+
+
+### 🍿영화 정보 API 사용
+
+⇒ TMDB API를 사용하여 영화 정보를 받아오고 Vue 컴포넌트에서 이를 표시합니다. Axios를 사용하여 HTTP 요청을 보내고 데이터를 받아옵니다.
+
+**주요기능**
+
+- Axios를 사용한 TMDB API 호출
+- 영화 정보 파싱 및 저장
+- API 호출 에러 처리
+
+<br/>
+<br/>
+
+### 🔧CI/CD 파이프라인 설정 (GitHub Actions 사용)
+
+⇒ GitHub Actions를 사용하여 지속적인 통합 및 배포(CI/CD) 파이프라인을 설정했습니다. 이는 코드 변경 사항을 자동으로 테스트하고 배포하여, 개발 프로세스를 자동화하고 안정성을 높입니다.
+
+**주요기능**
+
+- 코드 푸시 시 자동으로 테스트 실행
+- 빌드 및 배포 자동화
+- 테스트 실패 시 알림 설정
+
+<br/>
+<br/>
+<br/>
+
+## 📌 프로젝트 목표
+
+이 프로젝트는 Vue.js와 로컬 데이터베이스, Open API에 대한 이해와 사용 경험을 목표로 진행되었습니다. 
+또한, CI/CD 파이프라인을 통해 자동화된 배포 환경을 구축하여, 개발의 효율성과 안정성을 높이는 경험을 할 수 있습니다.

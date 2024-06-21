@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
-    <h1 class="title">Welcome to Movit</h1>
-    <p class="description">Search for your favorite movies and more.</p>
+    <h1>Welcome to Movit</h1>
+    <p>Search for your favorite movies and more.</p>
     <div class="card-container">
       <CardCom
         v-for="(movie, index) in movies"

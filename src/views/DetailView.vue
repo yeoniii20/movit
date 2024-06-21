@@ -1,6 +1,6 @@
 <template>
   <div class="detail-view">
-    <SidebarCom />
+    <!-- <SidebarCom /> -->
     <ContentCom
       :movie="movie"
       @share="shareMovie"
@@ -13,13 +13,13 @@
 
 <script>
 import axios from "axios";
-import SidebarCom from "@/components/SidebarCom.vue";
+// import SidebarCom from "@/components/SidebarCom.vue";
 import ContentCom from "@/components/ContentCom.vue";
 
 export default {
   name: "DetailView",
   components: {
-    SidebarCom,
+    // SidebarCom,
     ContentCom,
   },
   props: ["id"],
