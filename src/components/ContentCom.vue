@@ -156,6 +156,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 3em;
+  color: #eaeaea;
 }
 .header h1 {
   margin: 0;
@@ -164,12 +165,13 @@ export default {
 .header h2 {
   margin: 0;
   font-size: 1.5em;
-  color: #666;
+  color: #aaaaaa;
 }
 .user-info {
   display: flex;
   align-items: center;
   cursor: pointer;
+  color: #eaeaea;
 }
 .user-icon {
   font-size: 2em;
@@ -211,6 +213,7 @@ export default {
 }
 .description {
   margin-top: 20px;
+  color: #eaeaea;
 }
 .similar-movies {
   margin-top: 5em;
@@ -243,19 +246,22 @@ export default {
   cursor: pointer;
   margin-top: 1em;
   margin-bottom: 1em;
+  color: #eaeaea;
 }
 .play-trailer-btn:focus {
   outline: none;
 }
 .play-trailer-btn:active {
   text-decoration: underline;
-  color: #555;
+  color: #fff;
 }
 .movie-info-title {
   font-size: 20px;
   font-weight: bold;
+  color: #eaeaea;
 }
 .movie-info {
   font-size: 18px;
+  color: #eaeaea;
 }
 </style>
