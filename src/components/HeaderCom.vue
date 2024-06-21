@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <nav>
+    <nav class="header-section">
       <div class="logo" @click="navigateTo('/')">
         <img src="@/assets/image/retro_small.png" />Movit
       </div>
@@ -45,6 +45,11 @@ export default {
   top: 0;
   width: 100%;
   z-index: 1000;
+}
+
+.header-section {
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 nav {
