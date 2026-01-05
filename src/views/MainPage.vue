@@ -346,7 +346,7 @@ export default {
             (caughtCounts.value[item.emoji] || 0) + 1;
 
           // challenge success condition
-          if (gameState.value === "challenge" && totalCaught.value >= 20) {
+          if (gameState.value === "challenge" && totalCaught.value >= 100) {
             stopTimer();
 
             // 성공: 화면 멈춤 + 기록 유지 + 24h 락
@@ -393,7 +393,6 @@ export default {
       return `mailto:${to}?subject=${subject}&body=${body}`;
     });
 
-    // 필요 없으면 삭제해도 됨
     const handleScroll = () => {};
 
     onMounted(() => {
@@ -464,7 +463,7 @@ export default {
 /* ===== HUD ===== */
 .hud {
   position: fixed;
-  top: 64px; /* fixed header 높이에 맞춰 조정 */
+  top: 64px; 
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;
