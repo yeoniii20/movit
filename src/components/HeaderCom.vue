@@ -1,95 +1,213 @@
 <template>
   <header class="header">
-    <nav class="header-section">
-      <div class="logo" @click="navigateTo('/')">
-        <img src="@/assets/image/retro_small.png" />Movit
+    <nav class="header-section" aria-label="Main navigation">
+      <div
+        class="logo"
+        role="button"
+        tabindex="0"
+        @click="navigateTo('/')"
+        @keydown.enter="navigateTo('/')"
+      >
+        <img
+          class="logo-img"
+          src="@/assets/image/retro_small.png"
+          alt="Movit logo"
+        />
+        <span class="logo-text">Movit</span>
       </div>
-      <ul>
-        <!-- <li><button @click="navigateTo('/')">Main</button></li> -->
-        <li><button @click="navigateTo('/home')">Home</button></li>
-        <li><button @click="navigateTo('/canvas')">Canvas</button></li>
-        <!-- <li><button @click="navigateTo('/about')">About</button></li> -->
-        <!-- <li><button @click="navigateTo('/detail')">Detail</button></li> -->
-        <li><button @click="navigateTo('/myPage')">My Page</button></li>
+
+      <ul class="nav">
+        <li>
+          <button
+            class="nav-btn"
+            :class="{ active: isActive('/home') }"
+            @click="navigateTo('/home')"
+          >
+            Home
+          </button>
+        </li>
+        <li>
+          <button
+            class="nav-btn"
+            :class="{ active: isActive('/canvas') }"
+            @click="navigateTo('/canvas')"
+          >
+            Canvas
+          </button>
+        </li>
+        <li>
+          <button
+            class="nav-btn"
+            :class="{ active: isActive('/myPage') }"
+            @click="navigateTo('/myPage')"
+          >
+            My Page
+          </button>
+        </li>
       </ul>
     </nav>
   </header>
+
+  <div class="header-spacer" />
 </template>
 
 <script>
 import "../assets/styles.css";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 
 export default {
   name: "HeaderCom",
   setup() {
     const router = useRouter();
+    const route = useRoute();
 
     const navigateTo = (path) => {
       router.push(path);
     };
 
+    const isActive = (path) => route.path === path;
+
     return {
       navigateTo,
+      isActive,
     };
   },
 };
 </script>
 
 <style scoped>
+/* ====== Layout / Shell ====== */
 .header {
-  background-color: #292929;
-  color: white;
-  padding: 1em 0;
-  position: fixed;
-  top: 0;
+  background: rgba(8, 8, 10, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* 아주 얇은 네온 라인 */
+.header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
   width: 100%;
-  z-index: 1000;
+  height: 1px;
+  pointer-events: none;
 }
 
 .header-section {
-  margin-left: 10%;
-  margin-right: 10%;
-}
-
-nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  /* max-width: 1200px; */
   margin: 0 auto;
-  padding: 0 1em;
-}
+  width: min(1200px, 92%);
+  height: 46px;
 
-.logo {
   display: flex;
-  gap: 0.5em;
-  font-size: 1.5em;
-  font-weight: bold;
-  cursor: pointer;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
 }
 
-ul {
+.header-spacer {
+  height: 18px;
+}
+
+/* ====== Logo ====== */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  cursor: pointer;
+  user-select: none;
+
+  padding: 8px 10px;
+  border-radius: 12px;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.logo:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateY(-1px);
+}
+
+.logo:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.35);
+  outline-offset: 2px;
+}
+
+.logo-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  display: block;
+}
+
+.logo-text {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* ====== Nav ====== */
+.nav {
   list-style: none;
   display: flex;
+  align-items: center;
+  gap: 6px;
   margin: 0;
   padding: 0;
 }
 
-li {
-  margin-left: 1em;
-}
+.nav-btn {
+  appearance: none;
+  border: 1px solid transparent;
+  background: transparent;
 
-button {
-  background: none;
-  border: none;
-  color: white;
-  cursor: pointer;
+  color: rgba(255, 255, 255, 0.86);
   font: inherit;
-  text-decoration: none;
+
+  padding: 10px 12px;
+  border-radius: 999px;
+
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease,
+    transform 160ms ease, color 160ms ease;
 }
 
-button:hover {
-  color: #ddd; /* Optional: Change the color on hover instead of underlining */
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.96);
+  transform: translateY(-1px);
+}
+
+.nav-btn:active {
+  transform: translateY(0px);
+}
+
+.nav-btn:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.35);
+  outline-offset: 2px;
+}
+
+/* Active pill */
+.nav-btn.active {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.98);
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 640px) {
+  .header-section {
+    height: 56px;
+  }
+  .header-spacer {
+    height: 56px;
+  }
+  .logo-text {
+    font-size: 16px;
+  }
+  .nav-btn {
+    padding: 8px 10px;
+  }
 }
 </style>
