@@ -1,10 +1,18 @@
 <template>
   <div class="scroll-container" @scroll="handleScroll">
-    <div class="counter">
-      <div v-for="(count, emoji) in caughtCounts" :key="emoji">
-        {{ emoji }}: {{ count }}
+    <div class="hud">
+      <div class="hud-inner">
+        <div class="hud-title">Catch &amp; Chill</div>
+
+        <div class="chips">
+          <div class="chip" v-for="(count, emoji) in caughtCounts" :key="emoji">
+            <span class="chip-emoji">{{ emoji }}</span>
+            <span class="chip-count">{{ count }}</span>
+          </div>
+        </div>
       </div>
     </div>
+
     <div class="circle-container" ref="circleContainer">
       <div
         v-for="(item, index) in items"
@@ -16,7 +24,12 @@
         {{ item.emoji }}
       </div>
     </div>
-    <div class="movit-text" @click="goHome">Movit</div>
+
+    <button class="movit-cta" @click="goHome" aria-label="Go to home">
+      Movit
+      <span class="cta-sub">Go Home</span>
+    </button>
+
     <div
       class="custom-cursor"
       :style="{ top: cursorY + 'px', left: cursorX + 'px' }"
@@ -133,40 +146,189 @@ export default {
 
 <style scoped>
 .scroll-container {
-  background-color: black;
   overflow: hidden;
   position: relative;
   height: 150vh;
   cursor: none;
 }
 
-.counter {
-  display: flex;
-  gap: 30px;
+/* ===== HUD ===== */
+.hud {
   position: fixed;
-  top: 80px;
+  top: 64px;
   left: 50%;
   transform: translateX(-50%);
-  color: white;
-  font-size: 1.5em;
   z-index: 1000;
+  width: min(720px, 92%);
 }
 
+.hud-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+
+  padding: 12px 14px;
+  border-radius: 16px;
+
+  background: rgba(18, 18, 18, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+.hud-title {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0.95;
+}
+
+.chips {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 10px;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chip-emoji {
+  font-size: 16px;
+  filter: drop-shadow(0 0 10px rgba(248, 40, 254, 0.35));
+}
+
+.chip-count {
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 800;
+  font-size: 13px;
+  min-width: 18px;
+  text-align: right;
+}
+
+/* ===== Falling items ===== */
 .circle-container {
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
 }
 
 .falling-item {
-  font-size: 30px;
+  font-size: 25px;
   position: absolute;
   top: 0;
+
   animation-name: fall;
-  animation-timing-function: ease-in;
+  animation-timing-function: linear;
   animation-iteration-count: infinite;
+
+  filter: drop-shadow(0 0 14px rgba(255, 255, 255, 0.16))
+    drop-shadow(0 0 18px rgba(248, 40, 254, 0.18));
+  user-select: none;
+  will-change: transform;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-120px) rotate(-6deg);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateY(160vh) rotate(10deg);
+    opacity: 0.95;
+  }
+}
+
+/* ===== CTA button ===== */
+.movit-cta {
+  position: absolute;
+  bottom: 56px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+
+  border: 1px solid rgba(248, 40, 254, 0.35);
+  background: rgba(248, 40, 254, 0.16);
+  color: rgba(255, 255, 255, 0.92);
+
+  padding: 12px 18px;
+  border-radius: 16px;
+
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: 0.3px;
+
+  cursor: pointer;
+  transition: transform 160ms ease, background 160ms ease,
+    border-color 160ms ease;
+  box-shadow: 0 14px 40px rgba(248, 40, 254, 0.12);
+}
+
+.movit-cta:hover {
+  transform: translateX(-50%) translateY(-2px);
+  background: rgba(248, 40, 254, 0.22);
+  border-color: rgba(248, 40, 254, 0.55);
+}
+
+.movit-cta:active {
+  transform: translateX(-50%) translateY(0px);
+}
+
+.movit-cta:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.3);
+  outline-offset: 2px;
+}
+
+.cta-sub {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* ===== Custom cursor ===== */
+.custom-cursor {
+  width: 52px;
+  height: 52px;
+  background-image: url("@/assets/image/retro_small.png");
+  background-size: cover;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+
+  filter: drop-shadow(0 0 12px rgba(248, 40, 254, 0.35));
+}
+
+/* Mobile tweak */
+@media (max-width: 640px) {
+  .hud {
+    top: 66px;
+  }
+  .hud-inner {
+    padding: 10px 12px;
+  }
+  .movit-cta {
+    padding: 11px 16px;
+    border-radius: 14px;
+    font-size: 16px;
+  }
 }
 
 @keyframes fall {
