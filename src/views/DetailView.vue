@@ -116,11 +116,8 @@ export default {
 .detail-page {
   min-height: 100vh;
 
-  /* 홈/캔버스랑 톤 맞춘 다크 네온 배경 */
-  background: linear-gradient(180deg, #0b0b0e 0%, #0a0a0a 55%, #0b0b0e 100%);
-
   /* fixed header 고려 */
-  padding-top: 84px;
+  padding-top: 46px;
   padding-bottom: 60px;
 }
 
